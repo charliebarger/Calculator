@@ -49,7 +49,7 @@ let value = 0;
 let displayValue = onDisplay.textContent;
 let firstNum;
 let secondNum;
-let onOff = false;
+let firstSecond = 'first';
 let count = 0;
 let first;
 let second;
@@ -82,23 +82,20 @@ function displayScreen(button){
 function resetVariables(){
     onDisplay.textContent = 0;
     count = 0;
-    onOff = false;
+    firstSecond = 'first';
     equalSwitch = false;
     first = false;
     second = false;
 }
 
-let firstSecond;
 numberButtons.forEach((button) => { button.addEventListener('click', () => { 
     if (equalSwitch == true){
         resetVariables()
     }
-    if (!onOff){
-        firstSecond = 'first'
+    if (firstSecond == 'first'){
         first = displayScreen(button.textContent)
     }
     else{
-       firstSecond = 'second'
        second = displayScreen(button.textContent)
     }
     
@@ -114,7 +111,7 @@ function equals(){
 
 
 operatorButtons.forEach((button) => { button.addEventListener('click', () => {
-    onOff = true;
+    firstSecond = 'second';
     count = 0;
     if (equalSwitch == true){
         equalSwitch = false;
