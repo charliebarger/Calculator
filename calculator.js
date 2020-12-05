@@ -1,3 +1,24 @@
+const numberButtons = document.querySelectorAll(".numberButton");
+const display = document.querySelector(".display");
+const onDisplay = document.createElement('span')
+onDisplay.textContent = 0;
+
+display.appendChild(onDisplay)
+const operatorButtons = document.querySelectorAll(".operator")
+let value = 0;
+let displayValue = onDisplay.textContent;
+let firstNum;
+let secondNum;
+let firstSecond = 'first';
+let count = 0;
+let first;
+let second;
+let operatorSelection;
+let equalSign = document.querySelector('.equal')
+let answer;
+const clearButtons = document.querySelector(".clear")
+const changeSign = document.querySelector('.sign-change')
+let equalSwitch;
 
 function add(item1, item2){
     return(item1 + item2)
@@ -9,7 +30,9 @@ function multiply(item1, item2){
     return(item1 * item2)
 }
 function divide(item1, item2){
-    return(item1 / item2)
+    let bar = item2 == 0 ? 'Error': item1 / item2;
+    return(bar)
+    
 }
 function modulus(item1, item2){
     return(item1 % item2);
@@ -37,32 +60,7 @@ function operate(operator, item1, item2 = 0){
     return(choice(item1, item2))
 }
 
-
-const numberButtons = document.querySelectorAll(".numberButton");
-const display = document.querySelector(".display");
-const onDisplay = document.createElement('span')
-onDisplay.textContent = 0;
-
-display.appendChild(onDisplay)
-const operatorButtons = document.querySelectorAll(".operator")
-let value = 0;
-let displayValue = onDisplay.textContent;
-let firstNum;
-let secondNum;
-let firstSecond = 'first';
-let count = 0;
-let first;
-let second;
-let operatorSelection;
-let equalSign = document.querySelector('.equal')
-let answer;
-const clearButtons = document.querySelector(".clear")
-const changeSign = document.querySelector('.sign-change')
-
-
-//functions
-
-//shows numbers on screen and returns that number
+//clears display if the variable count == 0, if it is not it does nothing
 
 function clearDisplay(){
     if (count == 0){
@@ -70,6 +68,8 @@ function clearDisplay(){
         count++
     }
 }
+
+// call clear display to check if the screen needs to be cleared and then add and append the new number before returning it
 
 function displayScreen(button){
     clearDisplay()
@@ -79,6 +79,7 @@ function displayScreen(button){
 }
 
 //clears display, operator type, and puts count to 0
+
 function resetVariables(){
     onDisplay.textContent = 0;
     count = 0;
@@ -88,44 +89,45 @@ function resetVariables(){
     second = false;
 }
 
+//equal switch is true after the equals() function has been called, if a number button is pressed while equal switch is on, call resetVariables to have a clean workspace. if firstSecond is equal to 'first' the variable first is assigned else the second is
+
 numberButtons.forEach((button) => { button.addEventListener('click', () => { 
     if (equalSwitch == true){
         resetVariables()
     }
+
     if (firstSecond == 'first'){
         first = displayScreen(button.textContent)
     }
     else{
-       second = displayScreen(button.textContent)
+    second = displayScreen(button.textContent);
+    opSwitch = true
     }
-    
 })})
 
+let opSwitch = false;
 function equals(){
     answer = operate(operatorSelection, first, second);
     first = answer;
     onDisplay.textContent = answer;
     equalSwitch = true;
-    firstSecond = 'first'
+    firstSecond = 'second'
+    opSwitch = false;
 }
 
 
 operatorButtons.forEach((button) => { button.addEventListener('click', () => {
     firstSecond = 'second';
     count = 0;
-    if (equalSwitch == true){
-        equalSwitch = false;
-        second = false;
-    }
-    if (first && second){
+    if (first && second && opSwitch == true){
         equals();
-        second = false;
     }
+    equalSwitch = false;
     operatorSelection = button.textContent;
     }
 )});
 
-let equalSwitch
+
  equalSign.addEventListener('click', () => {
      equals()
  })
@@ -149,3 +151,4 @@ changeSign.addEventListener('click', () =>
         second = Number(onDisplay.textContent)
     }
 })
+
