@@ -1,6 +1,7 @@
 html,
 * {
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 html {
   background-image: url("./Images/lined_paper.png");
