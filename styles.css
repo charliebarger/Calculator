@@ -16,6 +16,7 @@ body {
   margin: auto;
   border-radius: 15px;
   padding: 12px;
+  box-shadow: 4px 3px 14px 8px rgba(0, 0, 0, 0.71);
 }
 
 .displayWrapper {
