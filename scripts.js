@@ -59,14 +59,10 @@ function operate(operator, item1, item2 = 0){
             choice = subtract;
             break;
         case 'x' :
-            choice = multiply;
-            break;
         case '*' :
             choice = multiply;
             break;
         case '÷':
-            choice = divide;
-            break;
         case '/':
             choice = divide;
             break;
